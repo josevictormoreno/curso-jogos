@@ -14,7 +14,7 @@ int main()
         window.close();
     }
 
-    window.clear(sf::Color::Blue);
+    window.clear();
     window.display();
   }
 
