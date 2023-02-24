@@ -5,13 +5,14 @@
 int main()
 {
   std::srand(std::time(nullptr));
-  sf::RenderWindow window(sf::VideoMode(1280, 720), "Minecrap - v0.2");
+  sf::RenderWindow window(sf::VideoMode(1280, 720), "Minecrap - v0.3");
   sf::RectangleShape rectangle;
   rectangle.setSize(sf::Vector2f(100.f, 100.f));
   rectangle.setFillColor(sf::Color::Green);
+  window.setFramerateLimit(144);
 
   float pos_rectangle = static_cast<float>(std::experimental::randint(10, (int)(window.getSize().x - rectangle.getSize().x - 10)));
-  rectangle.setPosition(sf::Vector2(pos_rectangle, 10.f));
+  rectangle.setPosition(sf::Vector2(pos_rectangle, 0.f));
   while (window.isOpen())
   {
     sf::Event event;
@@ -26,7 +27,7 @@ int main()
     if (rectangle.getPosition().y > window.getSize().y)
     {
       pos_rectangle = static_cast<float>(std::experimental::randint(10, (int)(window.getSize().x - rectangle.getSize().x - 10)));
-      rectangle.setPosition(sf::Vector2(pos_rectangle, 10.f));
+      rectangle.setPosition(sf::Vector2(pos_rectangle, 0.f));
     }
 
     window.clear();
