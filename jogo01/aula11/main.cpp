@@ -4,6 +4,7 @@
 
 int main()
 {
+  //TODO Corrigir variaveis, atualizar para orientação a objetos
   std::srand(std::time(nullptr));
   sf::RenderWindow window(sf::VideoMode(1280, 720), "Minecrap - v0.4");
   sf::RectangleShape rectangle;
