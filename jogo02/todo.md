@@ -1,4 +1,3 @@
 ## Todo list
-- Adicionar vidas
-- Adicionar condições de direção
-- Adicionar colisão com o proprio objeto
+- Adicionar condições de direção - done
+- Adicionar colisão com o proprio objeto - done

@@ -12,11 +12,12 @@ Snake::Snake()
   width = size * columns;
   height = size * lines;
   direction = RIGHT;
-  snakeSize = 4;
+  snakeSize = 3;
   points = 0;
   timer = 0.f;
   delay = 0.1f;
   fposition.x = fposition.y = 10;
+  gameOver = false;
   window.create(sf::VideoMode(width, height), "Snake game 1.0", sf::Style::Titlebar | sf::Style::Close);
   window.setPosition(sf::Vector2i(0, 0));
   backgroundTexture.loadFromFile("assets/bg.png");
@@ -29,7 +30,7 @@ Snake::Snake()
   text.setFont(font);
   text.setString("Pontos: " + std::to_string(points));
   text.setFillColor(sf::Color::White);
-  text.setPosition(10,10);
+  text.setPosition(10, 10);
 }
 
 void Snake::run_game()
@@ -50,6 +51,14 @@ void Snake::run_game()
     {
       timer = 0;
       collision();
+    }
+
+    if (gameOver)
+    {
+      points = 0;
+      snakeSize = 3;
+      fposition.x = fposition.y = 10;
+      gameOver = false;
     }
 
     window.clear();
@@ -83,13 +92,13 @@ void Snake::collision()
     sposition[i].x = sposition[i - 1].x;
     sposition[i].y = sposition[i - 1].y;
   }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && direction != LEFT)
     direction = RIGHT;
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && direction != RIGHT)
     direction = LEFT;
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && direction != DOWN)
     direction = UP;
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && direction != UP)
     direction = DOWN;
 
   switch (direction)
@@ -115,6 +124,15 @@ void Snake::collision()
     text.setString("Pontos: " + std::to_string(points));
     fposition.x = std::rand() % columns;
     fposition.y = std::rand() % lines;
+  }
+
+  for (int i{}; i < snakeSize; ++i)
+  {
+    if (sposition[0].x == sposition[i].x && sposition[0].y == sposition[i].y)
+    {
+      printf("Game Over!");
+      gameOver = true;
+    }
   }
 
   if (sposition[0].x > columns)

@@ -17,6 +17,7 @@ class Snake {
 		int points;
 		float timer, delay;
 		Direction direction;
+		bool gameOver;
 		sf::RenderWindow window;
 		sf::Texture backgroundTexture;
 		sf::Texture snakeTexture;
